@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Series on Zheng&#39;s Blog</title>
+    <link>https://shiz96.github.io/series/</link>
+    <description>Recent content in Series on Zheng&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; 2021 &lt;a href=&#34;https://www.wangchucheng.com/&#34;&gt;C. Wang&lt;/a&gt; and &lt;a href=&#34;https://www.ruiqima.com/&#34;&gt;R. Ma&lt;/a&gt;</copyright>
+    <lastBuildDate>Fri, 05 Feb 2021 21:35:16 +0800</lastBuildDate><atom:link href="https://shiz96.github.io/series/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建博客</title>
+      <link>https://shiz96.github.io/series/%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Fri, 05 Feb 2021 21:35:16 +0800</pubDate>
+      
+      <guid>https://shiz96.github.io/series/%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Themes Guide</title>
+      <link>https://shiz96.github.io/series/themes-guide/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiz96.github.io/series/themes-guide/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
