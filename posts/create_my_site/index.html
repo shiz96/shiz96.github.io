@@ -53,7 +53,7 @@
   "itemListElement": [{
       "@type": "ListItem",
       "position": 1 ,
-      "name":"Posts",
+      "name":"文章",
       "item":"https://shiz96.github.io/posts/"},{
       "@type": "ListItem",
       "position": 2 ,
@@ -74,14 +74,14 @@
     },
     "headline": "Hugo 创建个人博客 | Zheng\u0027s Blog","datePublished": "2021-02-05T21:35:16+08:00",
     "dateModified": "2021-02-05T21:35:16+08:00",
-    "wordCount":  91 ,
+    "wordCount":  122 ,
     "author": {
         "@type": "Person",
         "name": ["shizheng"]
     },
     "publisher": {
         "@type": "Person",
-        "name": "C. Wang",
+        "name": "Zheng Shi",
         "logo": {
             "@type": "ImageObject",
             "url": "https://shiz96.github.io/images/icon.png"
@@ -157,9 +157,8 @@
     <div id="target"
         class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
         <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
-            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">关于我的博客</a>
-            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">博客</a>
-            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">文档</a>
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">主页</a>
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">文章</a>
         </div>
 
         <div class="flex">
@@ -289,17 +288,27 @@
 <p>命令行键入：</p>
 <pre><code>hugo server -D
 </code></pre>
-<p>可以得到 localhost:1313 的地址，从浏览器打开变可以看到自己的 <code>site</code> 了。</p>
+<p>git p
+可以得到 localhost:1313 的地址，从浏览器打开变可以看到自己的 <code>site</code> 了。</p>
 <br>
 <h2 id="3-在-github-上部署-hugo">3. 在 Github 上部署 hugo</h2>
 <h3 id="创建仓库">创建仓库</h3>
 <p>首先在 Github上面创建一个 repository 要和自己的 ID 一致。</p>
+<blockquote>
+<p>注意你的仓库里不要有，也不要创建 readme.md 文件，否则无法显示网页。</p>
+</blockquote>
 <h3 id="建立静态页面">建立静态页面</h3>
 <p>利用 hugo 建立静态页面</p>
 <pre><code>hugo --theme=${your theme} --baseUrl=&quot;https://${yourID}.github.io&quot; -D
 </code></pre>
 <h3 id="上传到-github">上传到 github</h3>
 <pre><code>cd public
+git init
+git add.
+git commit -m &quot;${your commit}&quot;
+git remote add orgin ${your https of github}
+git pull --rebase origin master
+git push origin master 
 </code></pre>
 <br>
 <br>
@@ -313,6 +322,21 @@
 </div>
         
         
+        
+        <div class="flex md:justify-end my-4">
+    
+    
+    
+    
+    
+    
+    <a href="https://shiz96.github.io/blob/master/content/posts/create_my_site.md" title="Edit this page">
+        <i class="fas fa-edit mr-1"></i>
+        <span>Edit this page</span>
+    </a>
+</div>
+
+
         
         
         

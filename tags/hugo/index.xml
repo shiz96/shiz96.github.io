@@ -18,7 +18,7 @@
    地址 连接     Go 的地址 Go   Hugo github Hugo release   Hugo 官网 Hugo的官网   Hugo Quick Start Quick Start    2. 开始使用 hugo 创建新网站 hugo new site mysite  选择一个主题 上述的命令即利用hugo创建了一个个人站点，并命名为 mysite，接着我们从 Hugo 的主题 中找到一个喜欢的主题，下载放进 theme/ 文件夹中。通常把 exampleSite 文件夹中的配置文件复制到 mysite 中。
  这里推荐找一个文档比较齐全的主题，这里我选择了 eureka 这个主题，功能比较齐全，且文档说明比较详细。
  启动hugo查看site 命令行键入：
-hugo server -D  可以得到 localhost:1313 的地址，从浏览器打开变可以看到自己的 site 了。</description>
+hugo server -D  git p 可以得到 localhost:1313 的地址，从浏览器打开变可以看到自己的 site 了。</description>
     </item>
     
   </channel>
