@@ -2,23 +2,46 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>文章 on Zheng&#39;s Blog</title>
-    <link>https://shiz96.github.io/posts/</link>
+    <link>http://shiz96.github.io/posts/</link>
     <description>Recent content in 文章 on Zheng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&amp;copy; 2021 &lt;a href=&#34;https://www.wangchucheng.com/&#34;&gt;C. Wang&lt;/a&gt; and &lt;a href=&#34;https://www.ruiqima.com/&#34;&gt;R. Ma&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 05 Feb 2021 21:35:16 +0800</lastBuildDate><atom:link href="https://shiz96.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>&amp;copy; 2021 &lt;a href=&#34;https://shiz96.github.io/&#34;&gt; Zheng Shi&lt;/a&gt;</copyright>
+    <lastBuildDate>Thu, 25 Feb 2021 11:22:08 +0800</lastBuildDate><atom:link href="http://shiz96.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>编译 UNL-VRTM</title>
+      <link>http://shiz96.github.io/posts/compile_unlvrtm/</link>
+      <pubDate>Thu, 25 Feb 2021 11:22:08 +0800</pubDate>
+      
+      <guid>http://shiz96.github.io/posts/compile_unlvrtm/</guid>
+      <description>编译的需要准备：
+ Intel Fortran 的编译器 ifort Netcdf-fortran 的编译 gcc+ifort 安装包zlib，hdf5，necdf-c，netcdf-fortran，unl-vrtm  2021年2月24日成功编译，因此特地记录编译过程。
+一、 UNL-VRTM 介绍 UNL-VRTM的全称是“Unified Linearized Vector Radiative Transfer Model”。UNL-VRTM 是专门为模拟大气遥感观测以及反演气溶胶、气体、云或者地表性质而设计的。它被世界各地的课题组广泛的应用与地球遥感的问题。UNL-VRTM包括用于辐射传输的 VLIDORT 代码，线性化的Mie散射以及线性化的T-matrix代码来模拟气溶胶的单次散射，还有Rayleigh散射模块以及使用HITRAN来逐行(Line-by-Line, LBL)气体吸收。
+二、 UNL-VRTM 下载 访问UNL-VRTM的官网: https://unl-vrtm.org 提交申请获取源代码。</description>
+    </item>
+    
+    <item>
+      <title>GEE 的学习 (一)</title>
+      <link>http://shiz96.github.io/posts/learn_gee_1/</link>
+      <pubDate>Sat, 06 Feb 2021 09:16:16 +0800</pubDate>
+      
+      <guid>http://shiz96.github.io/posts/learn_gee_1/</guid>
+      <description>
+本文以及后续的文章会记录 Google Earth Engine 的学习。
+GUI 界面 Explorer 是GEE的图形界面，需要登录才可以使用。
+这里面的很多功能有待继续学习。
+Code Editor 界面  应用程序编程借口 Application Programming Interface, API
+ </description>
+    </item>
+    
     <item>
       <title>Hugo 创建个人博客</title>
-      <link>https://shiz96.github.io/posts/create_my_site/</link>
+      <link>http://shiz96.github.io/posts/create_my_site/</link>
       <pubDate>Fri, 05 Feb 2021 21:35:16 +0800</pubDate>
       
-      <guid>https://shiz96.github.io/posts/create_my_site/</guid>
+      <guid>http://shiz96.github.io/posts/create_my_site/</guid>
       <description>1. Hugo 和 Go 的下载与安装 hugo 是基于 go 的，因此为了使用 hugo 创建个人博客，首先需要下载go和hugo，hugo的quickinstall 里面详细介绍了关于 go 和 hugo 在不同平台的下载和安装。这里列出一些相关的连接，并不对安装进行过多的记录。
-   地址 连接     Go 的地址 Go   Hugo github Hugo release   Hugo 官网 Hugo的官网   Hugo Quick Start Quick Start    2. 开始使用 hugo 创建新网站 hugo new site mysite  选择一个主题 上述的命令即利用hugo创建了一个个人站点，并命名为 mysite，接着我们从 Hugo 的主题 中找到一个喜欢的主题，下载放进 theme/ 文件夹中。通常把 exampleSite 文件夹中的配置文件复制到 mysite 中。
- 这里推荐找一个文档比较齐全的主题，这里我选择了 eureka 这个主题，功能比较齐全，且文档说明比较详细。
- 启动hugo查看site 命令行键入：
-hugo server -D  git p 可以得到 localhost:1313 的地址，从浏览器打开变可以看到自己的 site 了。</description>
+   地址 连接     Go 的地址 Go   Hugo github Hugo release   Hugo 官网 Hugo的官网   Hugo Quick Start Quick Start    2.</description>
     </item>
     
   </channel>

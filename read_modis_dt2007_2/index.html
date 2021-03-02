@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>【精读】MODIS Dark Target (Levy et al, 2007) - Part2 | Zheng&#39;s Blog</title>
+<link rel="stylesheet" href="http://shiz96.github.io/css/eureka.min.css">
+<script defer src="http://shiz96.github.io/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="http://shiz96.github.io/images/icon_hu9ed112a33d39a3f252a071e601605fd0_661943_32x32_fill_box_center_2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://shiz96.github.io/images/icon_hu9ed112a33d39a3f252a071e601605fd0_661943_180x180_fill_box_center_2.png">
+
+<meta name="description"
+  content="精读 MODIS DarkTarget 算法">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Zheng's Blog",
+      "item":"http://shiz96.github.io/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"【精读】MODIS Dark Target (Levy et al, 2007) - Part2",
+      "item":"http://shiz96.github.io/read_modis_dt2007_2/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://shiz96.github.io/read_modis_dt2007_2/"
+    },
+    "headline": "【精读】MODIS Dark Target (Levy et al, 2007) - Part2 | Zheng\u0027s Blog","datePublished": "2021-02-09T13:51:22+08:00",
+    "dateModified": "2021-02-09T13:51:22+08:00",
+    "wordCount":  626 ,
+    "author": {
+        "@type": "Person",
+        "name": ["shizheng"]
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Zheng Shi",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://shiz96.github.io/images/icon.png"
+        }
+        },
+    "description": "精读 MODIS DarkTarget 算法"
+}
+</script><meta property="og:title" content="【精读】MODIS Dark Target (Levy et al, 2007) - Part2 | Zheng&#39;s Blog" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="http://shiz96.github.io/images/icon.png">
+
+
+<meta property="og:url" content="http://shiz96.github.io/read_modis_dt2007_2/" />
+
+
+
+<meta property="og:description" content="精读 MODIS DarkTarget 算法" />
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="Zheng&#39;s Blog" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-02-09T13:51:22&#43;08:00" />
+
+
+<meta property="article:modified_time" content="2021-02-09T13:51:22&#43;08:00" />
+
+
+
+<meta property="article:section" content="" />
+
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">Zheng&#39;s Blog</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">主页</a>
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">文章</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            switchMode('Auto')
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script></div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">【精读】MODIS Dark Target (Levy et al, 2007) - Part2</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-02-09</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>3 min read</span>
+    </div>
+    
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <blockquote>
+<p>题目：Second-generation operational algorithm: Retrieval of aerosol properties over land from inversion of Moderate Resolution Imaging Spectroradiometer spectral reflectance</p>
+<p>DOI： 10.1029/2006JD007811</p>
+</blockquote>
+<p>本文精度第二部分，地表反射率的关系。</p>
+<h2 id="5-visvs212-的地表反射率假设">5. VISvs2.12 的地表反射率假设</h2>
+<p>C004 算法中单一的地表反射率假设并不适用于全球每一个地方。因此文章中通过 MODIS 和 AERONET 数据重新验证了这一关系。</p>
+<h3 id="51-modisaeronet-大气校正">5.1 MODIS/AERONET 大气校正</h3>
+<p>大气校正即是理论上从卫星观测的辐射中减去大气的影响来计算地表的光学特性。这需要假设大气的光学属性，这包括气溶胶和非气溶胶的部分；除此之外，精确的辐射传输方程也是需要的。通过上文中的公式(1)即可计算地表反射率。</p>
+<p>为了减少气溶胶的多次散射，使用低光学厚度($\tau_{0.55} &lt; 0.2$)的大气条件进行校正。</p>
+<p>因此MODIS的大气校正的需要用到的数据为：</p>
+<ol>
+<li>气体校正后的表观反射率数据。</li>
+<li>AERONET光谱AOD数据和水汽含量。</li>
+</ol>
+<p>大气中的分子特性选择1976年美国标准大气，瑞利光学厚度则是通过海平面的值经过海拔校正后得到。由于卫星观测得到的反射率和地表反射率之间受到大气的影响较大。因此对于气溶胶模型的选择尤为重要。文中给出了粒子，当 $\tau_{0.55} = 0.2$ 的时候，选择不同的气溶胶模型 $\tau_{2.12}$ 的范围会在0.03～0.16之间。因此这些大气校正的数据会经过一定的筛选，筛选的指标就是 Angstrom 指数：</p>
+<ol>
+<li>如果 $\alpha &gt; 1.6$ 选择细粒子模型中的“moderately absorbing”模型。</li>
+<li>如果 $\alpha &lt; 0.6$ 选择细粒子模型中的“corse dominated model”模型。</li>
+<li>如果 $0.6 &lt; \alpha &lt; 1.6$ 弃用，因为气溶胶类型的混合有较大的不确定性。</li>
+</ol>
+<blockquote>
+<p>根据上述的筛选，最终的匹配点大约为6000个。</p>
+</blockquote>
+<br>
+<hr>
+<p><img src="/read_modis_dt2007_2/Figure1.png" alt="figure-1"></p>
+<p>Figure 1. Atmospherically corrected surface reflectance in (a) the visible (0.47 and 0.66 mm channels) compared with that in the 2.12 mm SWIR channel and (b) the 0.47 mm compared with that in the 0.66 mm channel.</p>
+<p>上图为大气校正的结果，文中给出结论：</p>
+<ol>
+<li>首先是y轴的截距非常的重要，因为2.12反射率为0并不代表可见光波段的反射率也为0</li>
+<li>0.66vs2.12 的相关性很高 $R=0.932$，但是 0.47vs2.12 的相关性相对较低 $R=0.753$。</li>
+<li>0.66vs2.12 以及 0.47vs2.12 的斜率和C004中 0.5 和 0.25的比值关系很接近，但确实也有一定的差别。</li>
+<li>0.47vs0.66 的相关性 $R=0.873$ 比 0.47vs2.12 的相关性要高。</li>
+</ol>
+<p>综上，对于地表反射率的估计要：</p>
+<ol>
+<li>根据 0.66vs2.12 的关系，从2.12得到0.66</li>
+<li>根据 0.47vs0.66 的关系，从0.66得到2.12</li>
+</ol>
+<hr>
+<h3 id="52-角度依赖">5.2 角度依赖</h3>
+<p>可以看出，Figure 1 中的点的散度还是比较大的，这也就意味着即使得到了较高的相关性，但对于地表的估计还是会有较大的差异。文中指出 VISvs2.12 的地表反射率关系和散射角是相关的。散射角的计算为：</p>
+<div>
+\[
+\Theta = cos^{-1} (-cos \theta_0 cos \theta + sin \theta_0 sin \theta cos\phi) \tag5
+\]
+<div>
+<p>因此文章做了以下分析，把散射角分到了等间隔的22区间内部（大约230个点一个区间），取每个区间的中位数（x轴）得到了以下四张图片：</p>
+<p><img src="/read_modis_dt2007_2/Figure2.png" alt="Figure 2"></p>
+<p>Figure 2. VISvs2.12 surface reflectance relationships as a function of scattering angle. The data were sorted according to scattering angle and put into 20 groups of equal size (about 230 points for each scattering angle bin). On all subplots, each point is plotted for the median value of scattering angle in the bin. Shown are (a) median values of reflectance at each channel as a function of the scattering angle. Linear regression was calculated for the 230 points in each group. Also shown are (b) the slope of the regression (for each angle bin), (c) the y-intercept, and (d) the regression correlation. Note for Figures 2b, 2c, and 2d that 0.47 mm versus 2.12 mm (r0470) is plotted in blue, 0.66 mm versus 2.12 mm (r0660) is plotted in red, and 0.47 versus 0.66 mm (rvis) is plotted in green.</p>
+<br>
+<p>(a) 图a代表了散射角和地表反射率之间的关系：2.12和散射角的关系比较大，0.66其次，0.47几乎和散射角没有关系</p>
+<p>(b) 图b代表了散射角和 0.47vs2.12, 0.66vs2.12 和 0.47vs0.66 之间的斜率的关系，可以看出 0.47vs0.66 的斜率和散射角几乎没有关系。0.66vs2.12 的斜率和散射角有关。</p>
+<p>(c) 图c代表了散射角和 0.47vs2.12, 0.66vs2.12 和 0.47vs0.66 之间的y轴截距的关系，可以看出散射角对于截距的影响比较大。</p>
+<p>(d) 图d代表了散射角和 0.47vs2.12, 0.66vs2.12 和 0.47vs0.66 之间相关系数的关系。</p>
+<br>
+<hr>
+<h3 id="53-地表类型和ndviswir对于-visvs212-的影响">5.3 地表类型和NDVI(SWIR)对于 VISvs2.12 的影响</h3>
+<p>因为 AERONET 站点在不同的地表区域，因此文章考虑了 VISvs2.12 和地表类型和季节的影响。首先根据 International Geosphere/ Biosphere Programme’s (IGBP) 的地表类型地图把上述的验证数据划分 “urban和nonurban” 地表，并且再根据季节 (winter or summer) 和 地理位置 (midlatitude or tropical) 进行了划分。结果发现了不同的地表类型展示了不同的 VISvs2.12 比值 (包括斜率和截距)。</p>
+<p>一般来说，植被覆盖越多地表 (midlatitude summer 的urban和unurban站点) 有更高的 0.66vs2.12 的地表反射率比值 (ratio &gt; 0.55)，这比 winter 或者 tropical 大草原站点的值要高 (ratio &lt; 0.55)。对于0.47vs0.66的比值，除了summer的urban站点(ratio~0.766)，0.47vs0.66 的地表反射率比值相对较为一致为，约为0.52。因此地表反射率的比值关系和地表的“greenness” 的程度是有关系的。</p>
+<p>除了城市区域之外，大部分的地表的 VISvs2.12 关系都和植被指数有一定的关系。 NDVI 的计算方式有很多种，例如:</p>
+<div>
+\[
+NDVI = \frac{NIR - Red}{NIR + Red} \tag6
+\]
+</div>
+<p>但是(6)比较容易受到气溶胶的影响，反而不好来判断地表的类型。因此还有一种基于红外波段的植被指数。</p>
+<div>
+\[
+NDVI_{SWIR} = \frac{\rho_{1.24}^{m} - \rho_{2.12}^{m}}{\rho_{1.24}^{m} + \rho_{2.12}^{m}} \tag7
+\]
+</div>
+<p>因为长波波段收到气溶胶的影响相对较小，因此可以用来判断地表的类型。 $NDVI_{SWIR}$ 是由 Karnieli et al., 2001 提出的。在清洁的天气下，$NDVI_{SWIR}$ 的值和 NDVI 具有较高的相关性。$NDVI_{SWIR}$ 的用法为:</p>
+<ol>
+<li>$NDVI_{SWIR} &gt; 0.6$ 的时候，认为地表主要是植被。</li>
+<li>$NDVI_{SWIR} &lt; 0.2$ 的时候，地表的植被覆盖度很小。</li>
+<li>$0.2 &lt; NDVI_{SWIR} &lt; 0.6$ 的时候，认为地表是植被中等覆盖。</li>
+</ol>
+<br>
+<p><img src="/read_modis_dt2007_2/Figure3.png" alt="Figure-3"></p>
+<p>Figure 3. The 0.66 mm versus 2.12 mm surface reflectance as a function of bins of NDVI SWIR values. The standard regression is plotted, with regression equations given in the lower right-hand corner. The ratios (if forced through zero) are given beneath the legend. Blue refers to low NDVISWIR , red to medium and green to high values.</p>
+<p>可以看出来不同植被覆盖的情况之下，回归曲线是有一定的差别的。当短波红外 NDVI 增加的时候 0.66vs2.12 的 ratio 是增加的。因此这个关系将被用于最后各种比值的参数化。</p>
+<h3 id="54-visvs212-最终的参数化">5.4 VISvs2.12 最终的参数化</h3>
+<p>综上结果表明，对于全球尺度的 VISvs2.12 的地表反射率关系会随着散射角、地表植被覆盖度(地表类型)变化的。</p>
+<blockquote>
+<p>这里对上面的关键信息进行提炼：</p>
+<ol>
+<li>0.66vs2.12 中：
+<ul>
+<li>散射角会影响 0.66vs2.12 的斜率</li>
+<li>散射角会影响 0.66vs2.12 的截距</li>
+<li>短波红外的NDVI 会影响 0.66vs2.12 的斜率</li>
+</ul>
+</li>
+<li>0.47vs0.66 中：
+<ul>
+<li>散射角不会影响 0.47vs0.66 的斜率</li>
+<li>散射角会影响 0.47vs0.66 的截距</li>
+<li>因为 NDVI 很少用来探究蓝光和红光之间的关系，因此不利用 NDVI 进行校正。</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<p>因此我们有:</p>
+<div>
+\[
+\rho_{0.66}^{s} = f(\rho_{2.12}^s) = \rho_{2.12}^s \cdot slope_{0.66/2.12} + yint_{0.66/2.12}  \\
+\rho_{0.47}^{s} = f(\rho_{0.66}^s) = \rho_{0.66}^s \cdot slope_{0.47/0.66} + yint_{0.47/2.12}  \tag8
+\]
+</div>
+<p>这里：</p>
+<div>
+\[
+    slope_{0.66/2.12} = slope_{0.66/2.12}^{NDVI_{SWIR}} + 0.002 \Theta - 0.27 \\
+    yint_{0.66/2.12} = -0.00025 \Theta + 0.033 \\
+    slope_{0.47/0.66} = 0.49 \\
+    yint_{0.47/0.66} = 0.005 \tag9
+\]
+</div>
+<p>这里的：</p>
+<div>
+\[
+    slope_{0.66/2.12}^{NDVI_{SWIR}} = 0.48; NDVI_{SWIR} < 0.25 \\
+    slope_{0.66/2.12}^{NDVI_{SWIR}} = 0.58; NDVI_{SWIR} > 0.75 \\
+    slope_{0.66/2.12}^{NDVI_{SWIR}} = 0.48 + 0.2(NDVI_{SWIR} - 0.25); 0.25 <=  NDVI_{SWIR} <= 0.75 \tag10
+\]
+</div>
+<p>文章中也指出了，上面的公式也并不是完全由分析图中展示的回归曲线完全一致，但是基于上面的结果来做的。但是这个实验结果确实被 AERONET 的站点分布所限制。</p>
+<h4 id="55-地表反射率比值误差">5.5 地表反射率比值误差</h4>
+<p>这里需要指出，尽管地表反射率进行了参数化，仍然会造成地表反射率估计的误差。根据 MODIS Land Surface Reflectance Homepage (<a href="http://modis-sr.ltdri.org/html/prodacc.htm">http://modis-sr.ltdri.org/html/prodacc.htm</a>) 指出，不合适的气溶胶模型的假设会造成大气校正后地表反射率在0.47和0.66 $\mu m$ 处产生0.002的误差，在2.12 $\mu m$ 处产生 0.006 的误差。2.12 处的误差相对较大，因为其更容易受到气溶胶模型的影响，例如粗粒子的选成了细粒子的。但因为实验利用了 AERONET 的观测对气溶胶模型进行了限制，因此 2.12 的大气校正后的地表反射率误差应该会大大的见效。当气溶胶光学厚度 $\tau_{0.55} = 0.5$ 的时候，细粒子气溶胶模型之间的选择会在0.47，0.66和2.12 处导致0.02，0.02，0.002光学厚度的误差，因此平均会导致地表反射率0.002，0.002，0.0002的误差(随着相函数会发生变化)。无论咋说，2.12的误差其实已经足够笑了，因此得到了地表反射率之间的比值关系应该是有道理的，稳定的，甚至模型的SSA可能假定错误。</p>
+<p>当然其他的误差也可能引入地表反射率的参数化，例如地表的BRDF。MODIS 的 Land Surface Reflectance Homepage说这一类误差和气溶胶模型选择差异带来的误差差不多。</p>
+<blockquote>
+<p>确实很难这样参数化</p>
+</blockquote>
+
+        </div>
+        
+        
+        
+        <div class="flex md:justify-end my-4">
+    
+    
+    
+    
+    
+    
+    <a href="https://shiz96.github.io/blob/master/content/read_modis_dt2007_2.md" title="Edit this page">
+        <i class="fas fa-edit mr-1"></i>
+        <span>Edit this page</span>
+    </a>
+</div>
+
+
+        
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="http://shiz96.github.io/authors/shizheng/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="http://shiz96.github.io/images/icon.png" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="http://shiz96.github.io/authors/shizheng/" class="block font-bold text-lg pb-1 mb-2 border-b">史正</a>
+            <span class="block pb-2">大气遥感直博在读</span>
+            
+            
+            
+            
+            
+            <a href="" class="mr-1">
+                <i class="&lt;nil&gt; fa-"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">Previous</span>
+        <a href="http://shiz96.github.io/read_modis_dt2007_3/" class="block">【精读】MODIS Dark Target (Levy et al, 2007) - Part3</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">Next</span>
+        <a href="http://shiz96.github.io/read_modis_dt2007_1/" class="block">【精读】MODIS Dark Target (Levy et al, 2007) - Part1</a>
+        
+    </div>
+</div>
+
+        
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#5-visvs212-的地表反射率假设">5. VISvs2.12 的地表反射率假设</a>
+      <ul>
+        <li><a href="#51-modisaeronet-大气校正">5.1 MODIS/AERONET 大气校正</a></li>
+        <li><a href="#52-角度依赖">5.2 角度依赖</a></li>
+        <li><a href="#53-地表类型和ndviswir对于-visvs212-的影响">5.3 地表类型和NDVI(SWIR)对于 VISvs2.12 的影响</a></li>
+        <li><a href="#54-visvs212-最终的参数化">5.4 VISvs2.12 最终的参数化</a>
+          <ul>
+            <li><a href="#55-地表反射率比值误差">5.5 地表反射率比值误差</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://shiz96.github.io/"> Zheng Shi</a> &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

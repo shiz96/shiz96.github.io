@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>【精读】MODIS Dark Target (Levy et al, 2007) - Part3 | Zheng&#39;s Blog</title>
+<link rel="stylesheet" href="http://shiz96.github.io/css/eureka.min.css">
+<script defer src="http://shiz96.github.io/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="http://shiz96.github.io/images/icon_hu9ed112a33d39a3f252a071e601605fd0_661943_32x32_fill_box_center_2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://shiz96.github.io/images/icon_hu9ed112a33d39a3f252a071e601605fd0_661943_180x180_fill_box_center_2.png">
+
+<meta name="description"
+  content="精读 MODIS DarkTarget 算法">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Zheng's Blog",
+      "item":"http://shiz96.github.io/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"【精读】MODIS Dark Target (Levy et al, 2007) - Part3",
+      "item":"http://shiz96.github.io/read_modis_dt2007_3/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://shiz96.github.io/read_modis_dt2007_3/"
+    },
+    "headline": "【精读】MODIS Dark Target (Levy et al, 2007) - Part3 | Zheng\u0027s Blog","datePublished": "2021-02-19T16:40:55+08:00",
+    "dateModified": "2021-02-19T16:40:55+08:00",
+    "wordCount":  262 ,
+    "publisher": {
+        "@type": "Person",
+        "name": "Zheng Shi",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://shiz96.github.io/images/icon.png"
+        }
+        },
+    "description": "精读 MODIS DarkTarget 算法"
+}
+</script><meta property="og:title" content="【精读】MODIS Dark Target (Levy et al, 2007) - Part3 | Zheng&#39;s Blog" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="http://shiz96.github.io/images/icon.png">
+
+
+<meta property="og:url" content="http://shiz96.github.io/read_modis_dt2007_3/" />
+
+
+
+<meta property="og:description" content="精读 MODIS DarkTarget 算法" />
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="Zheng&#39;s Blog" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-02-19T16:40:55&#43;08:00" />
+
+
+<meta property="article:modified_time" content="2021-02-19T16:40:55&#43;08:00" />
+
+
+
+<meta property="article:section" content="" />
+
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">Zheng&#39;s Blog</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">主页</a>
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">文章</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            switchMode('Auto')
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script></div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">【精读】MODIS Dark Target (Levy et al, 2007) - Part3</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-02-19</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>2 min read</span>
+    </div>
+    
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <blockquote>
+<p>题目：Second-generation operational algorithm: Retrieval of aerosol properties over land from inversion of Moderate Resolution Imaging Spectroradiometer spectral reflectance</p>
+<p>DOI： 10.1029/2006JD007811</p>
+</blockquote>
+<p>上两篇文章探讨了MODIS算法的气溶胶模型、查找表以及地表反射率经验模型，这篇文章主要探讨MODIS DT算法的具体实现，毕竟理论和实际之间还是相差的特别多的。</p>
+<p>这里首先介绍，一个MODIS DT的源代码 <a href="https://darktarget.gsfc.nasa.gov/reference/code">Stand_Alone-code</a>。这里面是利用 Fortan 实现了MODIS/VIIRS利用DT算法反演1个像元的AOD等参数。因此本文也从源码的角度入手分析 MODIS DT 算法的实现过程。</p>
+<h2 id="6-inversion-of-spectral-reflectance-including-212-um">6. Inversion of Spectral Reflectance, Including 2.12 um</h2>
+<p>算法首先指出了 C004 版本的代码就是假设了 2.12 $\mu m$ 的气溶胶是透明的，即卫星观测到的天顶反射率不受到地表反射率的影响。但在沙尘气溶胶下，气溶胶透明的假设是不成立的，即时在细粒子气溶胶下，当 $\tau_{0.55} = 0.5$ 的时候， $\tau_{2.12} ~ 0.05$，这会导致 0.005 的地表反射率估计误差，经过经验关系的传递，导致0.003的0.66 $\mu m$ 的地表反射率估计误差，进而导致了 $0.03$ 的气溶胶光学厚度的反演误差。虽然看起来这个差异并不大，但是结合440nm波段的AOD的反演误差，会导致最后粗细粒子比的反演误差。</p>
+<p>受到 MODIS 海洋气溶胶反演算法的启发，陆地算法采用了多通道地表反射率反演来反演陆地气溶胶的属性。算法通过组合细粒子和粗粒子气溶胶模型(每个都是双峰的)来匹配观测的天顶反射率。2.12 $\mu m$ 通道假设包含了地表和气溶胶的信息，而且可见光的地表反射率符合上述统计的经验关系。最终反演得到气溶胶光学厚度 $\tau_{0.55}$, $\eta$，$\rho_{2.12}^{s}$。</p>
+<h2 id="61-暗地表气溶胶反演">6.1 暗地表气溶胶反演</h2>
+<p>我们直接从代码的角度来看气溶胶反演的过程。</p>
+<h3 id="1-读取气溶胶查找表和全球气溶胶类型分布">(1) 读取气溶胶查找表和全球气溶胶类型分布</h3>
+<p>无论是 VIIRS/MODIS 需要的查找表有4个，分别是0.4666，0.554，0.645和2.113四个波段的查找表。每个查找表内部</p>
+<h3 id="2-读取城市化百分比-urban-percent">(2) 读取城市化百分比 Urban Percent</h3>
+<p>这里MODIS建立了一个全球城市化百分比的二进制数据，命名为 <code>urban_global.dat</code> 文件。</p>
+<h3 id="3-计算散射角">(3) 计算散射角</h3>
+<p>计算散射角的公式</p>
+<div>
+\[
+ \Theta = cos^{-1} (-cos \theta_0 cos \theta + sin \theta_0 sin \theta cos\phi) \tag5
+\]
+</div>
+<h3 id="4-差值rayleigh散射查找表">(4) 差值Rayleigh散射查找表</h3>
+<p>具体的代码详细见 Stand Alone Code</p>
+<h3 id="5-判断地表暗度">(5) 判断地表暗度</h3>
+<p>地表的暗度是个根据 2.12 $\mu m$ 的 TOAR 来判断的即：</p>
+<div>
+\[
+0.1 < \rho_{2.12}^m < 0.25  \tag{11}
+\]
+</div>
+<p>满足公式 11 的时候认定为暗地表。符合反演的亮地表的判断条件如下：</p>
+<div>
+\[
+0.25 < \rho_{2.12}^m < 0.25 * G < 0.4 \\
+G = 0.5((1/cos(VZA)) + (1/\sqrt{cos(SZA)})) \tag{12}
+\] 
+</div>
+<p>若以上条件都不满足，例如 $\rho_{2.12}^m$ &lt; 0.1 or $\rho_{2.12}^m$ &gt; 0.4, 则无反演结果。</p>
+<h3 id="6-查找表差值">(6) 查找表差值</h3>
+<p>包括了：</p>
+<ol>
+<li>Rayleigh 高程校正到对应波长。</li>
+<li>查找表校正到对应的波长。</li>
+<li>观测几何的差值。</li>
+</ol>
+<blockquote>
+<p>其中校正到对应波长这一部分我还是很疑惑的，有时间可以继续钻研一下。</p>
+</blockquote>
+<h3 id="7-计算-212-rho_212m-的地表反射率">(7) 计算 2.12 $\rho_{2.12}^m$ 的地表反射率</h3>
+<p>根据查找表：</p>
+<ol>
+<li>粗粒子和细粒子。-&gt; j = 2</li>
+<li>不同的 AOD 的值。 -&gt; k = 7</li>
+</ol>
+<p>校正得到 j * k 个地表反射率。校正的公式为：</p>
+<div>
+\[
+    \rho_{\lambda}^m = \frac{\rho_{\lambda}^m - \rho_{\lambda}^a}{s_{\lambda}(\rho_{\lambda}^m - \rho_{\lambda}^a) + T} \tag{13}
+\]
+<div>
+<h3 id="8-获取短波红外经验关系">(8) 获取短波红外经验关系</h3>
+<p>代码中的经验关系并不是和论文中给出的完全一致。其不仅仅是通过了 NDVI 来判断，同时还利用了前面读取的 Urban Percent 来进行了判断。抽时间可以把代码的细节公布一下。</p>
+<h3 id="9-获取-466-和-644-波段的地表反射率">(9) 获取 466 和 644 波段的地表反射率</h3>
+<p>根据前面的经验关系获得644和466的地表反射率，总计还是 j*k 个地表反射率。因此根据公式 (1) 可以获得这两个波段的地表反射率。</p>
+<h3 id="10-模拟天顶反射率">(10) 模拟天顶反射率</h3>
+<p>除了466和644之外，代码中也把 2.12 的天顶反射率重新算了一下，这里反算回去的2.12的TOAR和之前的差异很小。</p>
+<h3 id="11-设置粗细粒子比来计算不同粗细粒子比下的toar">(11) 设置粗细粒子比来计算不同粗细粒子比下的TOAR</h3>
+<p>使用列表来捋一下这个关系&hellip;</p>
+<ul>
+<li>for 13 $\eta$:
+<ul>
+<li>
+<p>for 7 $\tau$:</p>
+<ul>
+<li>for 4 $bn$:
+<ul>
+<li>计算eta加权 下的4个波段中7个AOD的天顶反射率 TOAR</li>
+</ul>
+</li>
+<li>计算eta加权 下的7个AOD的2.12波段地表反射率</li>
+</ul>
+</li>
+<li>
+<p>根据上面差值得到的7个AOD下的466的TOAR以及观测到的466TOAR，和查找表中553的AOD差值得到这个粗细粒子比下应该观测到的553波段的AOD</p>
+</li>
+<li>
+<p>根据553波段的AOD和查找表中的AOD差值得到4个波段应该观测到的TOAR，注意，这里得到的443的TOAR肯定是和上面的一样的，因为本来553的AOD就是443的TOAR差值得到的。</p>
+<blockquote>
+<p>代码中这样写我也不知道为啥，其实就是根据443的TOAR差值得到其余波段应该观测到的TOAR。因为212的模拟TOAR是经过了一步正算和一步反算得到的，因此和观测得到的212的TOAR相差也不大。因此唯一造成差异的就是660波段的TOAR的观测相对误差。</p>
+</blockquote>
+</li>
+<li>
+<p>对于每一个 $\eta$ 都可以得到一个 AOD550 的解和一个 660nm 波段拟合 TOAR 的误差。因此最终的结果有两个：</p>
+<ol>
+<li>一个是根据 660nm 的误差排序之后得到的 “Best” 的结果。</li>
+<li>第二个是平均13个粗细粒子比所有反演结果得到的 “Average” 的结果。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p>算法的流程图如下：</p>
+<p><img src="/read_modis_dt2007_3/Figure4_flowchart.png" alt="Figure 4"></p>
+<p>Figure 4 Flowchart illustrating the derivation of aerosol over land for C005.</p>
+<h2 id="7-总结">7 总结</h2>
+<p>精读DT2007年的文章，结合其团队发布的Stand Alone Code主要了解了 DT 算法暗目标反演的实现。</p>
+<p>现在对整个实验的结构做总结：</p>
+<ol>
+<li>通过聚类分析得到了细粒子的三种吸收类型的气溶胶和粗粒子一种吸收类型的气溶胶。</li>
+<li>之后通过Angstrom指数筛选Aeronet数据对MODIS在每个Aeronet站点的数据做了大气校正，得到了地表反射率的经验关系。并且引入了NDVI和散射角进行校正。</li>
+<li>根据两类查找表校正得到2.12的地表反射率的值，根据经验关系得到466和644的地表反射率估计值。然后再用这些估计值获取466和644波段的TOAR</li>
+<li>设立粗细粒子比，计算每种粗细粒子比加权下的TOAR。</li>
+<li>利用观测的466的TOAR，对应差值得到550的AOD，再差值得到644和2.12应该观测的TOAR应该是多少。因为466的差值决定了后面的差值，且2.12的模拟TOAR是经过了正算和反算所以基本不变，因此唯一可以体现出差异的就是644的模拟结果和实际观测结果之间的差异。</li>
+<li>根据上述差异就可以得到最终的AOD反演结果、$\eta$的值，212的地表反射率。</li>
+</ol>
+
+        </div>
+        
+        
+        
+        <div class="flex md:justify-end my-4">
+    
+    
+    
+    
+    
+    
+    <a href="https://shiz96.github.io/blob/master/content/read_modis_dt2007_3.md" title="Edit this page">
+        <i class="fas fa-edit mr-1"></i>
+        <span>Edit this page</span>
+    </a>
+</div>
+
+
+        
+        
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">Previous</span>
+        <a href="http://shiz96.github.io/read_modis_db2004_1/" class="block">【精读】MODIS Dee0p Blue (Hsu et al, 2004) - Part1</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">Next</span>
+        <a href="http://shiz96.github.io/read_modis_dt2007_2/" class="block">【精读】MODIS Dark Target (Levy et al, 2007) - Part2</a>
+        
+    </div>
+</div>
+
+        
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#6-inversion-of-spectral-reflectance-including-212-um">6. Inversion of Spectral Reflectance, Including 2.12 um</a></li>
+    <li><a href="#61-暗地表气溶胶反演">6.1 暗地表气溶胶反演</a>
+      <ul>
+        <li><a href="#1-读取气溶胶查找表和全球气溶胶类型分布">(1) 读取气溶胶查找表和全球气溶胶类型分布</a></li>
+        <li><a href="#2-读取城市化百分比-urban-percent">(2) 读取城市化百分比 Urban Percent</a></li>
+        <li><a href="#3-计算散射角">(3) 计算散射角</a></li>
+        <li><a href="#4-差值rayleigh散射查找表">(4) 差值Rayleigh散射查找表</a></li>
+        <li><a href="#5-判断地表暗度">(5) 判断地表暗度</a></li>
+        <li><a href="#6-查找表差值">(6) 查找表差值</a></li>
+        <li><a href="#7-计算-212-rho_212m-的地表反射率">(7) 计算 2.12 $\rho_{2.12}^m$ 的地表反射率</a></li>
+        <li><a href="#8-获取短波红外经验关系">(8) 获取短波红外经验关系</a></li>
+        <li><a href="#9-获取-466-和-644-波段的地表反射率">(9) 获取 466 和 644 波段的地表反射率</a></li>
+        <li><a href="#10-模拟天顶反射率">(10) 模拟天顶反射率</a></li>
+        <li><a href="#11-设置粗细粒子比来计算不同粗细粒子比下的toar">(11) 设置粗细粒子比来计算不同粗细粒子比下的TOAR</a></li>
+      </ul>
+    </li>
+    <li><a href="#7-总结">7 总结</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://shiz96.github.io/"> Zheng Shi</a> &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

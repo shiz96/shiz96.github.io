@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>编译 UNL-VRTM | Zheng&#39;s Blog</title>
+<link rel="stylesheet" href="http://shiz96.github.io/css/eureka.min.css">
+<script defer src="http://shiz96.github.io/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="http://shiz96.github.io/images/icon_hu9ed112a33d39a3f252a071e601605fd0_661943_32x32_fill_box_center_2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://shiz96.github.io/images/icon_hu9ed112a33d39a3f252a071e601605fd0_661943_180x180_fill_box_center_2.png">
+
+<meta name="description"
+  content="编译的需要准备：
+ Intel Fortran 的编译器 ifort Netcdf-fortran 的编译 gcc&#43;ifort 安装包zlib，hdf5，necdf-c，netcdf-fortran，unl-vrtm  2021年2月24日成功编译，因此特地记录编译过程。
+一、 UNL-VRTM 介绍 UNL-VRTM的全称是“Unified Linearized Vector Radiative Transfer Model”。UNL-VRTM 是专门为模拟大气遥感观测以及反演气溶胶、气体、云或者地表性质而设计的。它被世界各地的课题组广泛的应用与地球遥感的问题。UNL-VRTM包括用于辐射传输的 VLIDORT 代码，线性化的Mie散射以及线性化的T-matrix代码来模拟气溶胶的单次散射，还有Rayleigh散射模块以及使用HITRAN来逐行(Line-by-Line, LBL)气体吸收。
+二、 UNL-VRTM 下载 访问UNL-VRTM的官网: https://unl-vrtm.org 提交申请获取源代码。">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"文章",
+      "item":"http://shiz96.github.io/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"编译 UNL-VRTM",
+      "item":"http://shiz96.github.io/posts/compile_unlvrtm/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://shiz96.github.io/posts/compile_unlvrtm/"
+    },
+    "headline": "编译 UNL-VRTM | Zheng\u0027s Blog","datePublished": "2021-02-25T11:22:08+08:00",
+    "dateModified": "2021-02-25T11:22:08+08:00",
+    "wordCount":  186 ,
+    "author": {
+        "@type": "Person",
+        "name": ["shizheng"]
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Zheng Shi",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://shiz96.github.io/images/icon.png"
+        }
+        },
+    "description": "编译的需要准备：\n Intel Fortran 的编译器 ifort Netcdf-fortran 的编译 gcc\u002bifort 安装包zlib，hdf5，necdf-c，netcdf-fortran，unl-vrtm  2021年2月24日成功编译，因此特地记录编译过程。\n一、 UNL-VRTM 介绍 UNL-VRTM的全称是“Unified Linearized Vector Radiative Transfer Model”。UNL-VRTM 是专门为模拟大气遥感观测以及反演气溶胶、气体、云或者地表性质而设计的。它被世界各地的课题组广泛的应用与地球遥感的问题。UNL-VRTM包括用于辐射传输的 VLIDORT 代码，线性化的Mie散射以及线性化的T-matrix代码来模拟气溶胶的单次散射，还有Rayleigh散射模块以及使用HITRAN来逐行(Line-by-Line, LBL)气体吸收。\n二、 UNL-VRTM 下载 访问UNL-VRTM的官网: https:\/\/unl-vrtm.org 提交申请获取源代码。"
+}
+</script><meta property="og:title" content="编译 UNL-VRTM | Zheng&#39;s Blog" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="http://shiz96.github.io/images/icon.png">
+
+
+<meta property="og:url" content="http://shiz96.github.io/posts/compile_unlvrtm/" />
+
+
+
+
+<meta property="og:description" content="编译的需要准备：
+ Intel Fortran 的编译器 ifort Netcdf-fortran 的编译 gcc&#43;ifort 安装包zlib，hdf5，necdf-c，netcdf-fortran，unl-vrtm  2021年2月24日成功编译，因此特地记录编译过程。
+一、 UNL-VRTM 介绍 UNL-VRTM的全称是“Unified Linearized Vector Radiative Transfer Model”。UNL-VRTM 是专门为模拟大气遥感观测以及反演气溶胶、气体、云或者地表性质而设计的。它被世界各地的课题组广泛的应用与地球遥感的问题。UNL-VRTM包括用于辐射传输的 VLIDORT 代码，线性化的Mie散射以及线性化的T-matrix代码来模拟气溶胶的单次散射，还有Rayleigh散射模块以及使用HITRAN来逐行(Line-by-Line, LBL)气体吸收。
+二、 UNL-VRTM 下载 访问UNL-VRTM的官网: https://unl-vrtm.org 提交申请获取源代码。" />
+
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="Zheng&#39;s Blog" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-02-25T11:22:08&#43;08:00" />
+
+
+<meta property="article:modified_time" content="2021-02-25T11:22:08&#43;08:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">Zheng&#39;s Blog</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">主页</a>
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">文章</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            switchMode('Auto')
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script></div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">编译 UNL-VRTM</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-02-25</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <p>编译的需要准备：</p>
+<ol>
+<li>Intel Fortran 的编译器 ifort</li>
+<li>Netcdf-fortran 的编译 gcc+ifort</li>
+<li>安装包zlib，hdf5，necdf-c，netcdf-fortran，unl-vrtm</li>
+</ol>
+<p>2021年2月24日成功编译，因此特地记录编译过程。</p>
+<h2 id="一-unl-vrtm-介绍">一、 UNL-VRTM 介绍</h2>
+<p>UNL-VRTM的全称是“Unified Linearized Vector Radiative Transfer Model”。UNL-VRTM 是专门为模拟大气遥感观测以及反演气溶胶、气体、云或者地表性质而设计的。它被世界各地的课题组广泛的应用与地球遥感的问题。UNL-VRTM包括用于辐射传输的 VLIDORT 代码，线性化的Mie散射以及线性化的T-matrix代码来模拟气溶胶的单次散射，还有Rayleigh散射模块以及使用HITRAN来逐行(Line-by-Line, LBL)气体吸收。</p>
+<h2 id="二-unl-vrtm-下载">二、 UNL-VRTM 下载</h2>
+<p>访问UNL-VRTM的官网: <a href="https://unl-vrtm.org">https://unl-vrtm.org</a> 提交申请获取源代码。</p>
+<h2 id="三-编译-unl-vrtm">三、 编译 UNL-VRTM</h2>
+<p>目前仅支持在 Linux 下的安装。本次编译采用的系统版本为 Ubuntu18.04 LTS。另外编译需要intel fortran编译器。下面细致的介绍编译的过程。</p>
+<h3 id="1-intel-fortran-编译器的获取">1. Intel Fortran 编译器的获取</h3>
+<p>下载 <a href="https://software.intel.com/content/www/cn/zh/develop/tools/oneapi/all-toolkits.html">Intel OneAPI</a></p>
+<ul>
+<li>下载并安装 Intel® oneAPI Base Toolkit</li>
+<li>下载并安装 Intel® oneAPI HPC Toolkit</li>
+</ul>
+<p>Intel® oneAPI HPC Toolkit 里面就包括了 ifort 2021.1 版本的编译器。同时还包含了icc编译器，但这次编译没有选用icc而是选用了gcc。完事之后在 ./bachrc 里面加一行：</p>
+<pre><code class="language-bash">// 这一句
+source /opt/intel/oneapi/compiler/2021.1.1/env/vars.sh intel64
+// 或者这一句
+source /opt/intel/oneapi/setvars.sh intel64
+</code></pre>
+<blockquote>
+<p>gcc 的版本至少在8以上，之前gcc用的7版本，并不行。因此除了安装完 OneAPI 之后还要下载 gcc-8 或者 gcc-9。</p>
+</blockquote>
+<h3 id="2-netcdf-fortran-的编译">2. Netcdf-fortran 的编译</h3>
+<p>安装 UNL-VRTM 首先要使用 Intel Fortran编译器来编译 Netcdf-fortran 包。Netcdf-fortran 的编译，4.2版本之后的编译并不简单，大家可以详细参考 netcdf-fortran 官网的编译步骤，比较详细。这里我也总结我的编译过程。首先下载相关依赖的包：</p>
+<ul>
+<li>zlib-1.2.11</li>
+<li>netcdf-c-4.7.4</li>
+<li>hdf5-1.12.0</li>
+<li>netcdf-fortran-4.5.3</li>
+</ul>
+<p>这些包都是这会的最新的版本，因为老版本的包编译器会编译不过很多地方。然后使人狂躁 + 100000!</p>
+<h4 id="安装-zlib">安装 zlib</h4>
+<p><code>MAINDIR</code> 是安装netcdf的位置</p>
+<pre><code class="language-bash">$ cd zlib-1.2.11/
+$ ./configure --prefix=${MAINDIR}
+$ make check
+$ make install
+</code></pre>
+<h4 id="安装-hdf5">安装 hdf5</h4>
+<pre><code class="language-bash">cd hdf5-1.12.0/
+CC=gcc ./configure --with-zlib=${MAINDIR} --prefix=${MAINDIR}
+make check
+make install
+</code></pre>
+<p>注意这里的hdf得是1.10以上的，1.8.9我是没编译通过。另外gcc一定要更新到8或者9。安装速度较慢，耐心等待。</p>
+<h4 id="安装-netcdf-c">安装 netcdf-c</h4>
+<pre><code class="language-bash">cd netcdf-c-4.7.4/
+CC=gcc FC=ifort F90=ifort CPPFLAGS=-I${MAINDIR}/include LDFLAGS=-L${MAINDIR}/lib --prefix=${MAINDIR} --disable-dap
+make check
+make install
+</code></pre>
+<p>安装成功会有提示！</p>
+<h4 id="安装-netcdf-fortran">安装 netcdf-fortran</h4>
+<pre><code class="language-bash">export LD_LIBRARY_PATH=${MAINDIR}/lib:${LD_LIBRARY_PATH}
+cd netcdf-fortran-4.5.3/
+CC=gcc FC=ifort F90=ifort CPPFLAGS=-I${MAINDIR}/include LDFLAGS=-L${MAINDIR}/lib --prefix=${MAINDIR} --disable-fortran-type-check
+make check
+make install
+</code></pre>
+<p>这里的关键参数一个是把LD_LIBRARY_PATH导入环境变量，另一个是&ndash;disable-fortran-type-check参数，不带上会报错。</p>
+<h3 id="3-编译-unl-vrtm">3. 编译 UNL-VRTM</h3>
+<p>解压 UNL-VRTM 文件，修改build里面的</p>
+<pre><code class="language-bash">export NETCDF_PATH=${MAINDIR}
+./build
+</code></pre>
+<p>运行之后选 <code>1. Fresh and full compilation</code></p>
+<h2 id="四-总结">四、 总结</h2>
+<p>本次编译总结，首先遇到了编译问题从编译器和包两个方面考虑。是不是编译器的版本太老了，但包的版本太新了又或者是不是编译器的版本太心了，包的版本太老了。这次我把gcc更新到比较新的8版本，ifort也是2021.1，就把netcdf-fortran需要的包全都改成最新之后就编译成功了。总之编译还是费了一定的精力的，希望后面能够学有所成。</p>
+<h2 id="五参考链接">五、参考链接</h2>
+<p><a href="https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html#getting">官方安装netcdf-c</a></p>
+<p><a href="https://www.unidata.ucar.edu/software/netcdf/docs/building_netcdf_fortran.html">官方安装netcdf-fortran</a></p>
+
+        </div>
+        
+        
+        
+        <div class="flex md:justify-end my-4">
+    
+    
+    
+    
+    
+    
+    <a href="https://shiz96.github.io/blob/master/content/posts/compile_unlvrtm.md" title="Edit this page">
+        <i class="fas fa-edit mr-1"></i>
+        <span>Edit this page</span>
+    </a>
+</div>
+
+
+        
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="http://shiz96.github.io/authors/shizheng/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="http://shiz96.github.io/images/icon.png" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="http://shiz96.github.io/authors/shizheng/" class="block font-bold text-lg pb-1 mb-2 border-b">史正</a>
+            <span class="block pb-2">大气遥感直博在读</span>
+            
+            
+            
+            
+            
+            <a href="" class="mr-1">
+                <i class="&lt;nil&gt; fa-"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">Next</span>
+        <a href="http://shiz96.github.io/posts/learn_gee_1/" class="block">GEE 的学习 (一)</a>
+        
+    </div>
+</div>
+
+        
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一-unl-vrtm-介绍">一、 UNL-VRTM 介绍</a></li>
+    <li><a href="#二-unl-vrtm-下载">二、 UNL-VRTM 下载</a></li>
+    <li><a href="#三-编译-unl-vrtm">三、 编译 UNL-VRTM</a>
+      <ul>
+        <li><a href="#1-intel-fortran-编译器的获取">1. Intel Fortran 编译器的获取</a></li>
+        <li><a href="#2-netcdf-fortran-的编译">2. Netcdf-fortran 的编译</a>
+          <ul>
+            <li><a href="#安装-zlib">安装 zlib</a></li>
+            <li><a href="#安装-hdf5">安装 hdf5</a></li>
+            <li><a href="#安装-netcdf-c">安装 netcdf-c</a></li>
+            <li><a href="#安装-netcdf-fortran">安装 netcdf-fortran</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-编译-unl-vrtm">3. 编译 UNL-VRTM</a></li>
+      </ul>
+    </li>
+    <li><a href="#四-总结">四、 总结</a></li>
+    <li><a href="#五参考链接">五、参考链接</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://shiz96.github.io/"> Zheng Shi</a> &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

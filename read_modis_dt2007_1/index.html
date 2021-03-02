@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>【精读】MODIS Dark Target (Levy et al, 2007) - Part1 | Zheng&#39;s Blog</title>
+<link rel="stylesheet" href="http://shiz96.github.io/css/eureka.min.css">
+<script defer src="http://shiz96.github.io/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="http://shiz96.github.io/images/icon_hu9ed112a33d39a3f252a071e601605fd0_661943_32x32_fill_box_center_2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://shiz96.github.io/images/icon_hu9ed112a33d39a3f252a071e601605fd0_661943_180x180_fill_box_center_2.png">
+
+<meta name="description"
+  content="题目：Second-generation operational algorithm: Retrieval of aerosol properties over land from inversion of Moderate Resolution Imaging Spectroradiometer spectral reflectance
+DOI： 10.1029/2006JD007811
+ 本文精度前半部分，主要为数据和查找表部分。
+1. Abstract 摘要部分主要告诉了这片文章是对于最早DT (Kaufman et al, 1997a)算法的一个改进：">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Zheng's Blog",
+      "item":"http://shiz96.github.io/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"【精读】MODIS Dark Target (Levy et al, 2007) - Part1",
+      "item":"http://shiz96.github.io/read_modis_dt2007_1/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://shiz96.github.io/read_modis_dt2007_1/"
+    },
+    "headline": "【精读】MODIS Dark Target (Levy et al, 2007) - Part1 | Zheng\u0027s Blog","datePublished": "2021-02-07T10:11:51+08:00",
+    "dateModified": "2021-02-07T10:11:51+08:00",
+    "wordCount":  255 ,
+    "author": {
+        "@type": "Person",
+        "name": ["shizheng"]
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Zheng Shi",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://shiz96.github.io/images/icon.png"
+        }
+        },
+    "description": "题目：Second-generation operational algorithm: Retrieval of aerosol properties over land from inversion of Moderate Resolution Imaging Spectroradiometer spectral reflectance\nDOI： 10.1029\/2006JD007811\n 本文精度前半部分，主要为数据和查找表部分。\n1. Abstract 摘要部分主要告诉了这片文章是对于最早DT (Kaufman et al, 1997a)算法的一个改进："
+}
+</script><meta property="og:title" content="【精读】MODIS Dark Target (Levy et al, 2007) - Part1 | Zheng&#39;s Blog" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="http://shiz96.github.io/images/icon.png">
+
+
+<meta property="og:url" content="http://shiz96.github.io/read_modis_dt2007_1/" />
+
+
+
+
+<meta property="og:description" content="题目：Second-generation operational algorithm: Retrieval of aerosol properties over land from inversion of Moderate Resolution Imaging Spectroradiometer spectral reflectance
+DOI： 10.1029/2006JD007811
+ 本文精度前半部分，主要为数据和查找表部分。
+1. Abstract 摘要部分主要告诉了这片文章是对于最早DT (Kaufman et al, 1997a)算法的一个改进：" />
+
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="Zheng&#39;s Blog" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-02-07T10:11:51&#43;08:00" />
+
+
+<meta property="article:modified_time" content="2021-02-07T10:11:51&#43;08:00" />
+
+
+
+<meta property="article:section" content="" />
+
+
+<meta property="article:tag" content="精读" />
+
+<meta property="article:tag" content="MODIS" />
+
+
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">Zheng&#39;s Blog</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">主页</a>
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">文章</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            switchMode('Auto')
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script></div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">【精读】MODIS Dark Target (Levy et al, 2007) - Part1</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-02-07</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>2 min read</span>
+    </div>
+    
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <blockquote>
+<p>题目：Second-generation operational algorithm: Retrieval of aerosol properties over land from inversion of Moderate Resolution Imaging Spectroradiometer spectral reflectance</p>
+<p>DOI： 10.1029/2006JD007811</p>
+</blockquote>
+<p>本文精度前半部分，主要为数据和查找表部分。</p>
+<h2 id="1-abstract">1. Abstract</h2>
+<p>摘要部分主要告诉了这片文章是对于最早DT (Kaufman et al, 1997a)算法的一个改进：</p>
+<ol>
+<li>首先是更新了地表反射率的假设、气溶胶模型的光学属性和查找表。</li>
+<li>利用 0.46 $\mu m$ 、 0.66 $\mu m$ 和 2.12 $\mu m$ 进行反演。其中2.12 $\mu m$波段可用于反演粗粒子气溶胶。</li>
+<li>反演的参数包括：0.55 $\mu m$ 的气溶胶光学厚度、粗细粒子比和2.12 $\mu m$的地表反射率。且0.55 $\mu m$ 的气溶胶光学厚度允许 -0.05 以上的值。</li>
+<li>验证的结果很好，回归线为 $y=1.01x+0.03$ 且相关系数 $R=0.9$，全球验证区气溶胶的平均值从 0.28 降低到了 0.21。</li>
+</ol>
+<h2 id="2-introduction">2. Introduction</h2>
+<p>这里重点介绍了朗伯辐射传输方程：</p>
+<div>
+\[
+\rho^{TOA}_{\lambda}(\theta_0, \theta, \phi) = \rho^a_{\lambda}(\theta_0, \theta, \phi)  + \frac{T_{\lambda}(\theta_0, \theta) \rho^s_{\lambda} (\theta_0, \theta, \phi) }{1 - s_{\lambda}\rho^s_{\lambda}(\theta_0, \theta, \phi) } \tag1
+\] 
+<div>
+<p>这是气溶胶反演经常用到的朗伯辐射传输方程。其中：</p>
+<ol>
+<li>$\rho^{TOA}_{\lambda}$ 代表天顶反射率(表观反射率)</li>
+<li>$\rho^a_{\lambda}$ 代表的是大气程辐射</li>
+<li>$T_{\lambda}$ 代表大气总透射率，即上行透射率乘下行透射率</li>
+<li>$\rho^s_{\lambda}$ 代表地表朗伯反射率</li>
+<li>$s_{\lambda}$ 代表球形反照率</li>
+</ol>
+<blockquote>
+<p>利用朗伯辐射传输方程即将地表的二向反射特性忽略，用给定太阳和卫星观测几何下的地表双向反射率因子来代表地表反射率。</p>
+</blockquote>
+<p>朗伯辐射传输方程的公式右边，受到气溶胶影响的量有：$T_{\lambda}$、$s_{\lambda}$和$\rho^a_{\lambda}$。这些量受到气溶胶类型、气溶胶的含量以及观测几何的影响，因此通常选择使用查找表的方法来预先计算这些量。</p>
+<p>经过敏感性分析和机载模拟，MODIS DT 气溶胶光学厚度反演的精度要求是：</p>
+<div>
+\[
+    \Delta \tau = \pm 0.05 \pm 0.15 \tau \tag2
+\] 
+<div>
+<h2 id="3-数据集">3. 数据集</h2>
+<h3 id="modis-data">MODIS data</h3>
+<p>Terra 观测，从2000开始。</p>
+<p>Aqua 观测，从2002开始。</p>
+<h3 id="aeronet">AERONET</h3>
+<p>AERONET大约每15分钟进行一次太阳光直射观测，可以得到不同波段的气溶胶光学厚度。约每小时进行一次非直射的天空光观测，可以反演得到气溶胶的光学特性和气溶胶的粒子谱分布。AERONET的数据经过严格的校正和云掩膜，具有较高的精度。天空光观测的反演会假定气溶胶粒子为球形或者非球形，其选择的依据是根据取决于不同粒子形状天空光的拟合精度。基本的反演结果包括：</p>
+<ol>
+<li>气溶胶光学厚度 $\tau_{\lambda}$</li>
+<li>复折射指数。</li>
+<li>22个bin的对数正态分布的的粒子谱分布。</li>
+<li>拟合误差。
+额外的参数也会计算得到：</li>
+<li>Angstrom指数。</li>
+<li>双峰对数正态分布的气溶胶特性</li>
+<li>光谱单次散射反照率</li>
+<li>对数正态分布的不对称因子。</li>
+</ol>
+<h3 id="数据集的差别">数据集的差别</h3>
+<p>MODIS 和 AERONET 的相同的产品并不一定有完全相同的物理意义的。例如粗细粒子比，MODIS考虑的粗细粒子比是细粒子气溶胶光学厚度占总光学厚度的量；AERONET 的天空光反演指定粗细粒子比是粒子半径小于0.6 $\mu m$ 的体积和总体积的比值。</p>
+<h2 id="4-气溶胶模型和查找表">4. 气溶胶模型和查找表</h2>
+<h3 id="41-气溶胶模型和光学特性">4.1 气溶胶模型和光学特性</h3>
+<p>AERONET 站点只有在 $\tau_{0.44} &gt; 0.4$ 的时候才进行天空光反演。当气溶胶半径小于 $0.6\mu m$ 的时候，反演使用球形粒子的假设。当气溶胶半径大于 $0.6\mu m$ 的时候，反演使用类球形(非球形)粒子的假设。选取了14000的AERONET天空光反演产品，实施聚类分析。</p>
+<h4 id="412-细粒子">4.1.2 细粒子</h4>
+<p>对于球形粒子反演结果得到的 $\omega_0$ 和 $g$ 聚类分析得到了3种类型细粒子主导的气溶胶模型，每种类型的平均值代表了单独的一种气溶胶模型，因此可以总结出3种全球细粒子主导的气溶胶模型。包括了：</p>
+<ol>
+<li>“nonabsorbing”，非吸收型”气溶胶模型（$\omega_0 ~ 0.95$），大致和城市/工厂地域有关；</li>
+<li>“absorbing”，吸收型”气溶胶模型（$\omega_0 ~ 0.85$），和黑炭或者森林燃烧的有关；</li>
+<li>“moderately absorbing”，中等吸收型”和生物质燃烧以及化石燃料的不完全燃烧哟管。</li>
+</ol>
+<h4 id="413-粗粒子">4.1.3 粗粒子</h4>
+<p>同样对于粗粒子的聚类分析得到了一种具有代表性的“沙尘型”气溶胶模型。</p>
+<br>
+<p>上述每种气溶胶模型都是双峰log谱的。每一种都由粗或者细粒子主导。</p>
+<h3 id="42-查找表和辐射传输模型">4.2 查找表和辐射传输模型</h3>
+<h4 id="421-辐射传输模型">4.2.1 辐射传输模型</h4>
+<p>C4版本的查找表利用的是 “SPD” 辐射传输模型，这是一个标量的辐射传输模型，作者是 Dave (1970) 。但是不考虑偏振可能引入一定的误差，因此论文中讲辐射传输模型更换为了一个偏振辐射传输模型 RT3，作者是 Evans and Stephens 1991，这是一个基于平面平行和累加倍加的代码，支持是否开启偏振。</p>
+<blockquote>
+<p>RT3 采用的1976美国标准大气</p>
+</blockquote>
+<h4 id="422-modis-瑞利光学厚度的确定">4.2.2 MODIS 瑞利光学厚度的确定</h4>
+<p>瑞丽光学厚度的确定是基于辐射传输模拟和中心波长的计算得到的</p>
+<p><img src="/read_modis_dt2007/RODforEachBand.png" alt="ROD for each bands"></p>
+<h4 id="423-查找表">4.2.3 查找表</h4>
+<p>AOD设置：0.0, 0.25, 0.5, 1.0, 2.0, 3.0, 5.0</p>
+<p>SZA设置：0.0, 6.0, 12.0, 18.0 &hellip; 66.0</p>
+<p>VZA设置：0.0, &hellip;, 65.8 (LobattoQuadrature)</p>
+<p>RAA设置：0.0, 12.0, 24.0, &hellip;, 180</p>
+<p>假设地表反射率为0，因此计算的全部都是大气信息。</p>
+<p>但是辐射传输方程(1)中的上行透射率和球形反照率都是和地表相关的。首先给出以下的公式：</p>
+<div>
+\[ 
+s = \frac{1}{\rho_1^s}(1 - \frac{T\rho_1^s}{\rho^{TOA}-\rho_a}) \tag3
+\]
+\[ 
+s = \frac{1}{\rho_2^s}(1 - \frac{T\rho_2^s}{\rho^{TOA}-\rho_a}) \tag4
+\]
+<div>
+<p>在查找表的计算中给出了$\rho_1^s$ 和 $\rho_2^s$两个量分别为0.1和0.25。这两个方程可以解出两个未知量$s$和$T$。因此查找表中的每一个波段下不同气溶胶模型的气溶胶光学厚度 $\tau$ 都对应了一个 $T$, $s$, $\rho^a$。</p>
+<blockquote>
+<p>这里我直接疑惑，因为6s里面是可以直接计算出来s和T的，但是这两个量和地表的关系还需要进一步的验证。
+2021-2-19日验证，$s$和$T$都和地表反射率没有关系&hellip;这可能就是不同辐射传输code的问题了</p>
+</blockquote>
+<h2 id="拓展阅读">拓展阅读</h2>
+<p>Ichoku 2002</p>
+
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="http://shiz96.github.io/tags/%E7%B2%BE%E8%AF%BB/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#精读</a>
+    
+    <a href="http://shiz96.github.io/tags/modis/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#MODIS</a>
+    
+</div>
+        
+        
+        
+        <div class="flex md:justify-end my-4">
+    
+    
+    
+    
+    
+    
+    <a href="https://shiz96.github.io/blob/master/content/read_modis_dt2007_1.md" title="Edit this page">
+        <i class="fas fa-edit mr-1"></i>
+        <span>Edit this page</span>
+    </a>
+</div>
+
+
+        
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="http://shiz96.github.io/authors/shizheng/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="http://shiz96.github.io/images/icon.png" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="http://shiz96.github.io/authors/shizheng/" class="block font-bold text-lg pb-1 mb-2 border-b">史正</a>
+            <span class="block pb-2">大气遥感直博在读</span>
+            
+            
+            
+            
+            
+            <a href="" class="mr-1">
+                <i class="&lt;nil&gt; fa-"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">Previous</span>
+        <a href="http://shiz96.github.io/read_modis_dt2007_2/" class="block">【精读】MODIS Dark Target (Levy et al, 2007) - Part2</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">Next</span>
+        <a href="http://shiz96.github.io/math-support/" class="block">Math Support</a>
+        
+    </div>
+</div>
+
+        
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-abstract">1. Abstract</a></li>
+    <li><a href="#2-introduction">2. Introduction</a></li>
+    <li><a href="#3-数据集">3. 数据集</a>
+      <ul>
+        <li><a href="#modis-data">MODIS data</a></li>
+        <li><a href="#aeronet">AERONET</a></li>
+        <li><a href="#数据集的差别">数据集的差别</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-气溶胶模型和查找表">4. 气溶胶模型和查找表</a>
+      <ul>
+        <li><a href="#41-气溶胶模型和光学特性">4.1 气溶胶模型和光学特性</a>
+          <ul>
+            <li><a href="#412-细粒子">4.1.2 细粒子</a></li>
+            <li><a href="#413-粗粒子">4.1.3 粗粒子</a></li>
+          </ul>
+        </li>
+        <li><a href="#42-查找表和辐射传输模型">4.2 查找表和辐射传输模型</a>
+          <ul>
+            <li><a href="#421-辐射传输模型">4.2.1 辐射传输模型</a></li>
+            <li><a href="#422-modis-瑞利光学厚度的确定">4.2.2 MODIS 瑞利光学厚度的确定</a></li>
+            <li><a href="#423-查找表">4.2.3 查找表</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#拓展阅读">拓展阅读</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://shiz96.github.io/"> Zheng Shi</a> &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

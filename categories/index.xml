@@ -2,36 +2,36 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Zheng&#39;s Blog</title>
-    <link>https://shiz96.github.io/categories/</link>
+    <link>http://shiz96.github.io/categories/</link>
     <description>Recent content in Categories on Zheng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&amp;copy; 2021 &lt;a href=&#34;https://www.wangchucheng.com/&#34;&gt;C. Wang&lt;/a&gt; and &lt;a href=&#34;https://www.ruiqima.com/&#34;&gt;R. Ma&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 05 Feb 2021 21:35:16 +0800</lastBuildDate><atom:link href="https://shiz96.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>&amp;copy; 2021 &lt;a href=&#34;https://shiz96.github.io/&#34;&gt; Zheng Shi&lt;/a&gt;</copyright>
+    <lastBuildDate>Fri, 05 Feb 2021 21:35:16 +0800</lastBuildDate><atom:link href="http://shiz96.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>博客</title>
-      <link>https://shiz96.github.io/categories/%E5%8D%9A%E5%AE%A2/</link>
+      <link>http://shiz96.github.io/categories/%E5%8D%9A%E5%AE%A2/</link>
       <pubDate>Fri, 05 Feb 2021 21:35:16 +0800</pubDate>
       
-      <guid>https://shiz96.github.io/categories/%E5%8D%9A%E5%AE%A2/</guid>
+      <guid>http://shiz96.github.io/categories/%E5%8D%9A%E5%AE%A2/</guid>
       <description></description>
     </item>
     
     <item>
       <title>syntax</title>
-      <link>https://shiz96.github.io/categories/syntax/</link>
+      <link>http://shiz96.github.io/categories/syntax/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://shiz96.github.io/categories/syntax/</guid>
+      <guid>http://shiz96.github.io/categories/syntax/</guid>
       <description></description>
     </item>
     
     <item>
       <title>themes</title>
-      <link>https://shiz96.github.io/categories/themes/</link>
+      <link>http://shiz96.github.io/categories/themes/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://shiz96.github.io/categories/themes/</guid>
+      <guid>http://shiz96.github.io/categories/themes/</guid>
       <description></description>
     </item>
     
