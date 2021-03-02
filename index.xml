@@ -22,10 +22,10 @@
     
     <item>
       <title>【精读】MODIS Dee0p Blue (Hsu et al, 2004) - Part1</title>
-      <link>http://shiz96.github.io/read_modis_db2004_1/</link>
+      <link>http://shiz96.github.io/posts/read_modis_db2004_1/</link>
       <pubDate>Tue, 23 Feb 2021 09:15:32 +0800</pubDate>
       
-      <guid>http://shiz96.github.io/read_modis_db2004_1/</guid>
+      <guid>http://shiz96.github.io/posts/read_modis_db2004_1/</guid>
       <description>题目：Aerosol Properties Over Bright-Reflecting Source Regions
 DOI： 10.1109/TGRS.2004.824067
  上次精读DT的算法，结合Stand Alone Code，真的是受益匪浅。本次精读主要是学习 DB 算法，DT和DB是MODIS的两套经典算法，DT找到了地表反射率的经验关系，DB算法利用了最小值合成法建立了地表反射率数据库。后续多种传感器的算法也是基于这两个算法发展起来的。因此这次我们阅读DB算法
@@ -35,10 +35,10 @@ DOI： 10.1109/TGRS.2004.824067
     
     <item>
       <title>【精读】MODIS Dark Target (Levy et al, 2007) - Part3</title>
-      <link>http://shiz96.github.io/read_modis_dt2007_3/</link>
+      <link>http://shiz96.github.io/posts/read_modis_dt2007_3/</link>
       <pubDate>Fri, 19 Feb 2021 16:40:55 +0800</pubDate>
       
-      <guid>http://shiz96.github.io/read_modis_dt2007_3/</guid>
+      <guid>http://shiz96.github.io/posts/read_modis_dt2007_3/</guid>
       <description>题目：Second-generation operational algorithm: Retrieval of aerosol properties over land from inversion of Moderate Resolution Imaging Spectroradiometer spectral reflectance
 DOI： 10.1029/2006JD007811
  上两篇文章探讨了MODIS算法的气溶胶模型、查找表以及地表反射率经验模型，这篇文章主要探讨MODIS DT算法的具体实现，毕竟理论和实际之间还是相差的特别多的。
@@ -47,10 +47,10 @@ DOI： 10.1029/2006JD007811
     
     <item>
       <title>【精读】MODIS Dark Target (Levy et al, 2007) - Part2</title>
-      <link>http://shiz96.github.io/read_modis_dt2007_2/</link>
+      <link>http://shiz96.github.io/posts/read_modis_dt2007_2/</link>
       <pubDate>Tue, 09 Feb 2021 13:51:22 +0800</pubDate>
       
-      <guid>http://shiz96.github.io/read_modis_dt2007_2/</guid>
+      <guid>http://shiz96.github.io/posts/read_modis_dt2007_2/</guid>
       <description>题目：Second-generation operational algorithm: Retrieval of aerosol properties over land from inversion of Moderate Resolution Imaging Spectroradiometer spectral reflectance
 DOI： 10.1029/2006JD007811
  本文精度第二部分，地表反射率的关系。
@@ -59,10 +59,10 @@ DOI： 10.1029/2006JD007811
     
     <item>
       <title>【精读】MODIS Dark Target (Levy et al, 2007) - Part1</title>
-      <link>http://shiz96.github.io/read_modis_dt2007_1/</link>
+      <link>http://shiz96.github.io/posts/read_modis_dt2007_1/</link>
       <pubDate>Sun, 07 Feb 2021 10:11:51 +0800</pubDate>
       
-      <guid>http://shiz96.github.io/read_modis_dt2007_1/</guid>
+      <guid>http://shiz96.github.io/posts/read_modis_dt2007_1/</guid>
       <description>题目：Second-generation operational algorithm: Retrieval of aerosol properties over land from inversion of Moderate Resolution Imaging Spectroradiometer spectral reflectance
 DOI： 10.1029/2006JD007811
  本文精度前半部分，主要为数据和查找表部分。

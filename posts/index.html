@@ -63,12 +63,36 @@
         },{
             "@type":"ListItem",
             "position":  2 ,
+            "name": "【精读】MODIS Dee0p Blue (Hsu et al, 2004) - Part1",
+            "description": "精读 DB 算法，从最初的2004年文章开始读起",
+            "url": "http://shiz96.github.io/posts/read_modis_db2004_1/"
+        },{
+            "@type":"ListItem",
+            "position":  3 ,
+            "name": "【精读】MODIS Dark Target (Levy et al, 2007) - Part3",
+            "description": "精读 MODIS DarkTarget 算法",
+            "url": "http://shiz96.github.io/posts/read_modis_dt2007_3/"
+        },{
+            "@type":"ListItem",
+            "position":  4 ,
+            "name": "【精读】MODIS Dark Target (Levy et al, 2007) - Part2",
+            "description": "精读 MODIS DarkTarget 算法",
+            "url": "http://shiz96.github.io/posts/read_modis_dt2007_2/"
+        },{
+            "@type":"ListItem",
+            "position":  5 ,
+            "name": "【精读】MODIS Dark Target (Levy et al, 2007) - Part1",
+            "description": "题目：Second-generation operational algorithm: Retrieval of aerosol properties over land from inversion of Moderate Resolution Imaging Spectroradiometer spectral reflectance\nDOI： 10.1029/2006JD007811\n 本文精度前半部分，主要为数据和查找表部分。\n1. Abstract 摘要部分主要告诉了这片文章是对于最早DT (Kaufman et al, 1997a)算法的一个改进：",
+            "url": "http://shiz96.github.io/posts/read_modis_dt2007_1/"
+        },{
+            "@type":"ListItem",
+            "position":  6 ,
             "name": "GEE 的学习 (一)",
             "description": "\n本文以及后续的文章会记录 Google Earth Engine 的学习。\nGUI 界面 Explorer 是GEE的图形界面，需要登录才可以使用。\n这里面的很多功能有待继续学习。\nCode Editor 界面  应用程序编程借口 Application Programming Interface, API\n ",
             "url": "http://shiz96.github.io/posts/learn_gee_1/"
         },{
             "@type":"ListItem",
-            "position":  3 ,
+            "position":  7 ,
             "name": "Hugo 创建个人博客",
             "description": "利用hugo搭建我的个人博客",
             "url": "http://shiz96.github.io/posts/create_my_site/"
@@ -211,6 +235,147 @@
     <div class="mr-6 my-2">
         <i class="fas fa-clock mr-1"></i>
         <span>1 min read</span>
+    </div>
+    
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="http://shiz96.github.io/posts/read_modis_db2004_1/" class="font-bold text-xl hover:text-eureka">【精读】MODIS Dee0p Blue (Hsu et al, 2004) - Part1</a>
+</div>
+<div class="content">
+  题目：Aerosol Properties Over Bright-Reflecting Source Regions
+DOI： 10.1109/TGRS.2004.824067
+ 上次精读DT的算法，结合Stand Alone Code，真的是受益匪浅。本次精读主要是学习 DB 算法，DT和DB是MODIS的两套经典算法，DT找到了地表反射率的经验关系，DB算法利用了最小值合成法建立了地表反射率数据库。后续多种传感器的算法也是基于这两个算法发展起来的。因此这次我们阅读DB算法
+1 Introduction 行文首先说明沙尘气溶胶对辐射的影响，引用：
+ J. Haywood and O. Bougher, “Estimates of the direct and indirect radiative forcing due to tropospheric aerosols: A review,” Rev.
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-02-23</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>5 min read</span>
+    </div>
+    
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="http://shiz96.github.io/posts/read_modis_dt2007_3/" class="font-bold text-xl hover:text-eureka">【精读】MODIS Dark Target (Levy et al, 2007) - Part3</a>
+</div>
+<div class="content">
+  题目：Second-generation operational algorithm: Retrieval of aerosol properties over land from inversion of Moderate Resolution Imaging Spectroradiometer spectral reflectance
+DOI： 10.1029/2006JD007811
+ 上两篇文章探讨了MODIS算法的气溶胶模型、查找表以及地表反射率经验模型，这篇文章主要探讨MODIS DT算法的具体实现，毕竟理论和实际之间还是相差的特别多的。
+这里首先介绍，一个MODIS DT的源代码 Stand_Alone-code。这里面是利用 Fortan 实现了MODIS/VIIRS利用DT算法反演1个像元的AOD等参数。因此本文也从源码的角度入手分析 MODIS DT 算法的实现过程。
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-02-19</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>2 min read</span>
+    </div>
+    
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="http://shiz96.github.io/posts/read_modis_dt2007_2/" class="font-bold text-xl hover:text-eureka">【精读】MODIS Dark Target (Levy et al, 2007) - Part2</a>
+</div>
+<div class="content">
+  题目：Second-generation operational algorithm: Retrieval of aerosol properties over land from inversion of Moderate Resolution Imaging Spectroradiometer spectral reflectance
+DOI： 10.1029/2006JD007811
+ 本文精度第二部分，地表反射率的关系。
+5. VISvs2.12 的地表反射率假设 C004 算法中单一的地表反射率假设并不适用于全球每一个地方。因此文章中通过 MODIS 和 AERONET 数据重新验证了这一关系。
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-02-09</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>3 min read</span>
+    </div>
+    
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="http://shiz96.github.io/posts/read_modis_dt2007_1/" class="font-bold text-xl hover:text-eureka">【精读】MODIS Dark Target (Levy et al, 2007) - Part1</a>
+</div>
+<div class="content">
+  题目：Second-generation operational algorithm: Retrieval of aerosol properties over land from inversion of Moderate Resolution Imaging Spectroradiometer spectral reflectance
+DOI： 10.1029/2006JD007811
+ 本文精度前半部分，主要为数据和查找表部分。
+1. Abstract 摘要部分主要告诉了这片文章是对于最早DT (Kaufman et al, 1997a)算法的一个改进：
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-02-07</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>2 min read</span>
     </div>
     
     

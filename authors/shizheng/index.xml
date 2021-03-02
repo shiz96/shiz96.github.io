@@ -22,10 +22,10 @@
     
     <item>
       <title>【精读】MODIS Dark Target (Levy et al, 2007) - Part2</title>
-      <link>http://shiz96.github.io/read_modis_dt2007_2/</link>
+      <link>http://shiz96.github.io/posts/read_modis_dt2007_2/</link>
       <pubDate>Tue, 09 Feb 2021 13:51:22 +0800</pubDate>
       
-      <guid>http://shiz96.github.io/read_modis_dt2007_2/</guid>
+      <guid>http://shiz96.github.io/posts/read_modis_dt2007_2/</guid>
       <description>题目：Second-generation operational algorithm: Retrieval of aerosol properties over land from inversion of Moderate Resolution Imaging Spectroradiometer spectral reflectance
 DOI： 10.1029/2006JD007811
  本文精度第二部分，地表反射率的关系。
@@ -34,10 +34,10 @@ DOI： 10.1029/2006JD007811
     
     <item>
       <title>【精读】MODIS Dark Target (Levy et al, 2007) - Part1</title>
-      <link>http://shiz96.github.io/read_modis_dt2007_1/</link>
+      <link>http://shiz96.github.io/posts/read_modis_dt2007_1/</link>
       <pubDate>Sun, 07 Feb 2021 10:11:51 +0800</pubDate>
       
-      <guid>http://shiz96.github.io/read_modis_dt2007_1/</guid>
+      <guid>http://shiz96.github.io/posts/read_modis_dt2007_1/</guid>
       <description>题目：Second-generation operational algorithm: Retrieval of aerosol properties over land from inversion of Moderate Resolution Imaging Spectroradiometer spectral reflectance
 DOI： 10.1029/2006JD007811
  本文精度前半部分，主要为数据和查找表部分。
