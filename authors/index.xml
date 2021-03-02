@@ -2,36 +2,36 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Authors on Zheng&#39;s Blog</title>
-    <link>http://shiz96.github.io/authors/</link>
+    <link>https://shiz96.github.io/authors/</link>
     <description>Recent content in Authors on Zheng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; 2021 &lt;a href=&#34;https://shiz96.github.io/&#34;&gt; Zheng Shi&lt;/a&gt;</copyright>
-    <lastBuildDate>Thu, 25 Feb 2021 11:22:08 +0800</lastBuildDate><atom:link href="http://shiz96.github.io/authors/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Feb 2021 11:22:08 +0800</lastBuildDate><atom:link href="https://shiz96.github.io/authors/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>史正</title>
-      <link>http://shiz96.github.io/authors/shizheng/</link>
+      <link>https://shiz96.github.io/authors/shizheng/</link>
       <pubDate>Thu, 25 Feb 2021 11:22:08 +0800</pubDate>
       
-      <guid>http://shiz96.github.io/authors/shizheng/</guid>
+      <guid>https://shiz96.github.io/authors/shizheng/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Example Author</title>
-      <link>http://shiz96.github.io/authors/example-author/</link>
+      <link>https://shiz96.github.io/authors/example-author/</link>
       <pubDate>Fri, 20 Nov 2020 22:52:56 +0800</pubDate>
       
-      <guid>http://shiz96.github.io/authors/example-author/</guid>
+      <guid>https://shiz96.github.io/authors/example-author/</guid>
       <description>Self Introduction Cras ex dui, tristique a libero eget, consectetur semper ligula. Nunc augue arcu, malesuada a nisi et, molestie finibus metus. Sed lacus odio, ultricies a nisl vitae, sollicitudin tempor ipsum.</description>
     </item>
     
     <item>
       <title>Hugo Authors</title>
-      <link>http://shiz96.github.io/authors/hugo-authors/</link>
+      <link>https://shiz96.github.io/authors/hugo-authors/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://shiz96.github.io/authors/hugo-authors/</guid>
+      <guid>https://shiz96.github.io/authors/hugo-authors/</guid>
       <description>Vestibulum vel arcu Donec interdum justo sed posuere imperdiet. Quisque nec mauris eu erat mattis egestas in vitae nisl. Sed nisl augue, congue sed quam quis, tempor tempus nibh. Pellentesque accumsan in quam a interdum.</description>
     </item>
     

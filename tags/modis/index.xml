@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MODIS on Zheng&#39;s Blog</title>
-    <link>http://shiz96.github.io/tags/modis/</link>
+    <link>https://shiz96.github.io/tags/modis/</link>
     <description>Recent content in MODIS on Zheng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; 2021 &lt;a href=&#34;https://shiz96.github.io/&#34;&gt; Zheng Shi&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 07 Feb 2021 10:11:51 +0800</lastBuildDate><atom:link href="http://shiz96.github.io/tags/modis/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Feb 2021 10:11:51 +0800</lastBuildDate><atom:link href="https://shiz96.github.io/tags/modis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>【精读】MODIS Dark Target (Levy et al, 2007) - Part1</title>
-      <link>http://shiz96.github.io/posts/read_modis_dt2007_1/</link>
+      <link>https://shiz96.github.io/posts/read_modis_dt2007_1/</link>
       <pubDate>Sun, 07 Feb 2021 10:11:51 +0800</pubDate>
       
-      <guid>http://shiz96.github.io/posts/read_modis_dt2007_1/</guid>
+      <guid>https://shiz96.github.io/posts/read_modis_dt2007_1/</guid>
       <description>题目：Second-generation operational algorithm: Retrieval of aerosol properties over land from inversion of Moderate Resolution Imaging Spectroradiometer spectral reflectance
 DOI： 10.1029/2006JD007811
  本文精度前半部分，主要为数据和查找表部分。

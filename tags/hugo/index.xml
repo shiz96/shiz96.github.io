@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hugo on Zheng&#39;s Blog</title>
-    <link>http://shiz96.github.io/tags/hugo/</link>
+    <link>https://shiz96.github.io/tags/hugo/</link>
     <description>Recent content in Hugo on Zheng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; 2021 &lt;a href=&#34;https://shiz96.github.io/&#34;&gt; Zheng Shi&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 05 Feb 2021 21:35:16 +0800</lastBuildDate><atom:link href="http://shiz96.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 05 Feb 2021 21:35:16 +0800</lastBuildDate><atom:link href="https://shiz96.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hugo 创建个人博客</title>
-      <link>http://shiz96.github.io/posts/create_my_site/</link>
+      <link>https://shiz96.github.io/posts/create_my_site/</link>
       <pubDate>Fri, 05 Feb 2021 21:35:16 +0800</pubDate>
       
-      <guid>http://shiz96.github.io/posts/create_my_site/</guid>
+      <guid>https://shiz96.github.io/posts/create_my_site/</guid>
       <description>1. Hugo 和 Go 的下载与安装 hugo 是基于 go 的，因此为了使用 hugo 创建个人博客，首先需要下载go和hugo，hugo的quickinstall 里面详细介绍了关于 go 和 hugo 在不同平台的下载和安装。这里列出一些相关的连接，并不对安装进行过多的记录。
    地址 连接     Go 的地址 Go   Hugo github Hugo release   Hugo 官网 Hugo的官网   Hugo Quick Start Quick Start    2.</description>
     </item>
