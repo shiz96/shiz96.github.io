@@ -77,7 +77,7 @@
     },
     "headline": "编译 UNL-VRTM | Zheng\u0027s Blog","datePublished": "2021-02-25T11:22:08+08:00",
     "dateModified": "2021-02-25T11:22:08+08:00",
-    "wordCount":  186 ,
+    "wordCount":  188 ,
     "author": {
         "@type": "Person",
         "name": ["shizheng"]
@@ -281,7 +281,7 @@ make install
 <p>注意这里的hdf得是1.10以上的，1.8.9我是没编译通过。另外gcc一定要更新到8或者9。安装速度较慢，耐心等待。</p>
 <h4 id="安装-netcdf-c">安装 netcdf-c</h4>
 <pre><code class="language-bash">cd netcdf-c-4.7.4/
-CC=gcc FC=ifort F90=ifort CPPFLAGS=-I${MAINDIR}/include LDFLAGS=-L${MAINDIR}/lib --prefix=${MAINDIR} --disable-dap
+CC=gcc FC=ifort F77=ifort F90=ifort CPPFLAGS=-I${MAINDIR}/include LDFLAGS=-L${MAINDIR}/lib --prefix=${MAINDIR} --disable-dap
 make check
 make install
 </code></pre>
@@ -289,7 +289,7 @@ make install
 <h4 id="安装-netcdf-fortran">安装 netcdf-fortran</h4>
 <pre><code class="language-bash">export LD_LIBRARY_PATH=${MAINDIR}/lib:${LD_LIBRARY_PATH}
 cd netcdf-fortran-4.5.3/
-CC=gcc FC=ifort F90=ifort CPPFLAGS=-I${MAINDIR}/include LDFLAGS=-L${MAINDIR}/lib --prefix=${MAINDIR} --disable-fortran-type-check
+CC=gcc FC=ifort F77=ifort F90=ifort CPPFLAGS=-I${MAINDIR}/include LDFLAGS=-L${MAINDIR}/lib --prefix=${MAINDIR} --disable-fortran-type-check
 make check
 make install
 </code></pre>
